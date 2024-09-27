@@ -105,16 +105,20 @@ namespace TestTask.Controllers
                     for (int col = 1; col <= colCount; col++)
                     {
                         var header = headers[col - 1]; // Get the header for the current column
-                        var value = worksheet.Cells[row, col].Value ?? ""; // Get the cell value or an empty string
+                        var value = worksheet.Cells[row, col].Value; // Get the cell value
 
-                        // Add the value to the corresponding header's list
-                        data[header].Add(value);
+                        // Only add non-empty values to the corresponding header's list
+                        if (value != null && !string.IsNullOrWhiteSpace(value.ToString()))
+                        {
+                            data[header].Add(value);
+                        }
                     }
                 }
             }
 
             return data;
         }
+
 
 
         private List<string> ExtractHeaders(string filePath)
