@@ -1,4 +1,4 @@
-#root {
+/* #root {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
@@ -39,4 +39,76 @@
 
 .read-the-docs {
   color: #888;
+} */
+
+.container {
+  display: flex;
+  justify-content: space-between;
 }
+
+.left-column, .right-column {
+  width: 48%; /* Adjust as needed */
+  padding: 10px;
+}
+
+.left-column {
+  border-right: 1px solid #ccc; /* Optional border for separation */
+}
+
+.right-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.dropdown-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.field-label {
+  font-weight: bold;
+  margin-right: 20px;
+}
+
+.select {
+  flex-grow: 1;
+}
+
+.preview-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.preview-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.header-label {
+  font-weight: bold;
+  margin-right: 20px;
+}
+
+.header-value {
+  color: #333;
+}
+
+/* Ensure the validate button stays aligned at the bottom of the left column */
+.validate-button {
+  margin-top: 20px;
+  width: 100%;
+  padding: 10px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.validate-button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
