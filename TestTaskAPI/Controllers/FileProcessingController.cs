@@ -56,13 +56,10 @@ namespace TestTask.Controllers
 
             var filePath = _fileStore[token];
 
-            // Parse the Excel file
             var excelData = ParseExcelFile(filePath);
 
-            // Initialize the JSON output structure
             var jsonOutput = new Dictionary<string, List<object>>();
 
-            // Populate the JSON output based on selected columns
             foreach (var column in selectedColumns)
             {
                 if (excelData.ContainsKey(column))
@@ -71,7 +68,6 @@ namespace TestTask.Controllers
                 }
                 else
                 {
-                    // If the column does not exist in the parsed data, add an empty list
                     jsonOutput[column] = new List<object>();
                 }
             }
@@ -83,31 +79,26 @@ namespace TestTask.Controllers
         {
             var data = new Dictionary<string, List<object>>();
 
-            // Load the Excel file
             using (var package = new ExcelPackage(new FileInfo(filePath)))
             {
-                var worksheet = package.Workbook.Worksheets[0]; // Get the first worksheet
-                var rowCount = worksheet.Dimension.Rows; // Get the total number of rows
-                var colCount = worksheet.Dimension.Columns; // Get the total number of columns
-
-                // Get the headers from the first row and initialize the dictionary
+                var worksheet = package.Workbook.Worksheets[0]; 
+                var rowCount = worksheet.Dimension.Rows; 
+                var colCount = worksheet.Dimension.Columns; 
                 var headers = new List<string>();
                 for (int col = 1; col <= colCount; col++)
                 {
-                    var header = worksheet.Cells[1, col].Text; // Assuming the first row contains headers
+                    var header = worksheet.Cells[1, col].Text; 
                     headers.Add(header);
-                    data[header] = new List<object>(); // Initialize a list for each header
+                    data[header] = new List<object>(); 
                 }
 
-                // Loop through the rows, starting from the second row (row 2)
                 for (int row = 2; row <= rowCount; row++)
                 {
                     for (int col = 1; col <= colCount; col++)
                     {
-                        var header = headers[col - 1]; // Get the header for the current column
-                        var value = worksheet.Cells[row, col].Value; // Get the cell value
+                        var header = headers[col - 1];
+                        var value = worksheet.Cells[row, col].Value; 
 
-                        // Only add non-empty values to the corresponding header's list
                         if (value != null && !string.IsNullOrWhiteSpace(value.ToString()))
                         {
                             data[header].Add(value);
