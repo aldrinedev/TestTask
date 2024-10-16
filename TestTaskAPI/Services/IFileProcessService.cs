@@ -10,5 +10,7 @@ namespace TestTaskAPI.Services
     public interface IFileProcessService
     {
         Task<ServiceResponse<List<string>>> UploadFile(IFormFile file);
+        Task<ServiceResponse<ValidationResult>> ValidateFile(string token);
+        ServiceResponse<List<OrderDataRow>> ImportData(string token, List<string> selectedColumns);
     }
 }

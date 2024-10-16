@@ -1,3 +1,5 @@
+using TestTaskAPI.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -13,6 +15,8 @@ builder.Services.AddCors(opt =>
                     policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:3000");
                 });
             });
+
+builder.Services.AddTransient<IFileProcessService, FileProcessService>();
 
 var app = builder.Build();
 
